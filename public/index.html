@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Tutorial</title>
+    <!-- Not present in the tutorial. Just for basic styling. -->
+    <link rel="stylesheet" href="css/base.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <!--<script type="text/babel" src="scripts/example.js"></script>-->
+    <script type="text/babel">
+        
+        //######################## COMMENT BOX ###########################
+        //Create ReactComponent by calling the .createClass method on the React object
+        //run the render() function to compile and return HTML
+        //className attribute is equivalent to the id, the value given here is the custom name of the element when rendering into the ReactDOM, written in camelCase
+        var CommentBox = React.createClass({
+
+          loadCommentsFromServer: function() {
+            $.ajax({
+              url: this.props.url,
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                this.setState({data: data});
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+          },
+
+          handleCommentSubmit: function(comment) {
+            $.ajax({
+              url: this.props.url,
+              dataType: 'json',
+              type: 'POST',
+              data: comment,
+              success: function(data) {
+                this.setState({data: data});
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+          },
+
+          derp: function(text) {
+            console.log(text);
+          },
+
+          deleteFunction: function(commentIndex) {
+            console.log(commentIndex);
+            this.setState(state => {
+              state.data.splice(commentIndex, 1);
+              return {data: state.data};
+            });
+          },
+
+          getInitialState: function() {
+            return {data: []};
+          },
+
+          componentDidMount: function() {
+            this.loadCommentsFromServer();
+            setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+          },
+
+          render: function() {
+            return (
+              <div className="commentBox">
+                <h1>Comments
+                  <CommentCount text={this.state.data.length}/>
+                </h1>
+                
+                <CommentList data={this.state.data} deleteComment={this.deleteFunction}/> 
+                <CommentForm onCommentSubmit={this.handleCommentSubmit} hickcomment={this.derp} />
+              </div>
+            );
+          }
+        });
+
+        //####################### COMMENT COUNT ###########################
+        var CommentCount = React.createClass({
+          render: function() {
+            return (
+              <span className="commentCount"> ({this.props.text})</span>
+            );
+          }
+        });
+
+        //######################## COMMENT LIST ###########################
+        var CommentList = React.createClass({
+
+          render: function() {
+            var passedMethod = this.props.deleteComment;
+            var commentMaker = function(comment) {
+              var commentIndex = comment.id;
+
+              return (
+                <Comment author={comment.author} key={comment.id} value={commentIndex} passedMethod={passedMethod}>{comment.text}</Comment>
+              );
+            }
+
+            var commentNodes = this.props.data.map(commentMaker);
+
+            return (
+              <div className="commentList">
+                {commentNodes}
+              </div>
+            );
+          }
+        });
+
+        //########################## COMMENTS #############################
+        //This component is dependant on data passed to it by its parent, CommentList. Data is passed along as a property and accessed using this.props or this.props.children for any nested data
+        var Comment = React.createClass({
+
+          rawMarkup: function() {
+            var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+            return {__html: rawMarkup };
+          },
+
+          render: function() {
+            
+            return (
+              <div className="comment">
+                <h4 className="commentAuthor">
+                  {this.props.author}
+                </h4>
+                <span dangerouslySetInnerHTML={this.rawMarkup()} /> 
+                <button onClick={this.props.passedMethod}>Delete</button>
+              </div>
+            );
+          }
+        });
+
+        //######################## COMMENT FORM ###########################
+        var CommentForm = React.createClass({
+
+          getInitialState: function() {
+            return {author: '', text: ''};
+          },
+          handleAuthorChange: function(e) {
+            this.setState({author: e.target.value});
+          },
+          handleTextChange: function(e) {
+            this.setState({text: e.target.value});
+          },
+
+          handleSubmit: function(e) {
+            e.preventDefault();
+            var author = this.state.author.trim();
+            var text = this.state.text.trim();
+            if (!text || !author) {
+              return;
+            }
+            this.props.onCommentSubmit({author: author, text: text});
+            this.props.hickcomment('herp');
+            this.setState({author: '', text: ''});
+          },
+
+          render: function() {
+            return (
+              <form className="commentForm" onSubmit={this.handleSubmit}>
+              <h2>CommentForm</h2>
+                <input type="text" placeholder="..." value={this.state.author} onChange={this.handleAuthorChange}/>
+                <input type="text" placeholder="..." value={this.state.text} onChange={this.handleTextChange}/>
+                <input type="submit" value="Post" />
+              </form>
+            );
+          }
+        });
+
+        //DATA object to contain our comments
+        // var data = [
+        //   {id: 1, author: "Jonny Cash", text: "Wine, women and sad, sad songs"},
+        //   {id: 2, author: "Elvis Presley", text: "Ah lahk sparkly onesies and *lots* of colourful pills"}
+        // ];
+
+        //################# RENDER IT! RENDER IT FOREVER ##################
+        //render the above defined component, CommentBox into the virtual ReactDOM. It is important that ReactDOM.render() remains at the bottom of the script block and that all components called are defined above it.
+        //Note the PascalCase of the custom reactElement
+        ReactDOM.render(
+          <CommentBox url="/api/comments" pollInterval={10000} />,
+          document.getElementById('content')
+        );
+
+    </script>
+  </body>
+</html>
