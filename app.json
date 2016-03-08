@@ -2,9 +2,9 @@
   "name": "cat cat!",
   "description": "cat pictures for everyone",
   "keywords": [ "cat", "pictures", "custom", "wallpaper" ],
-  "repository": "https://github.com/reactjs/react-tutorial",
-  "logo": "https://facebook.github.io/react/img/logo.svg",
-  "website": "http://facebook.github.io/react/docs/tutorial.html",
+  "repository": "git@github.com:slinky-bass/cat-cat.git",
+  // "logo": "https://facebook.github.io/react/img/logo.svg",
+  // "website": "http://facebook.github.io/react/docs/tutorial.html",
   "success_url": "/",
   "env" : {
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-nodejs.git"
