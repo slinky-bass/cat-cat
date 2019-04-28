@@ -21,7 +21,7 @@ class List extends Component {
 
     mapListItemsToTableRows(item, index) {
         const imageSrc = "http://placehold.it/150&text=Item$" + index;
-        const image = <img src={imageSrc} alt="placeholder image" />;
+        const image = <img className="list-item-image" src={imageSrc} alt="placeholder image" />;
         const title = item.title;;
         const description = item.description;
 

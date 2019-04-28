@@ -13,7 +13,6 @@
         display: flex;
         flex-flow: row nowrap;
         width: 100%;
-        transition: background-color 300ms ease-in-out;
 
         &:hover {
             cursor: pointer;
@@ -61,16 +60,24 @@
                 }
             }
         }
-        //table row item with transition styles for managing active highlight on selection
+
+        //table row item
         .table-row-item {
             position: relative;
-            display: flex;
-            flex-flow: row nowrap;
-            flex-grow: 1;
-            flex-basis: 0;
             word-break: break-word;
-            text-transform: capitalize;
-            @include rem('padding', 17px);
+            @include rem('padding', 17px);        
+            transition: background-color 400ms ease-in-out;
+
+            & ~ * {
+                flex: 1;
+            }
+            
+            &:last-child {
+                flex: 3;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
         }
     }
 }
