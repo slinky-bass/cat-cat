@@ -41,3 +41,10 @@ export function selectListItem(selectedId) {
         selectedId
     }
 }
+
+//Deselect an item
+export function deselectListItem() {
+    return {
+        type: types.ACT_DESELECT_LIST_ITEM,
+    }
+}

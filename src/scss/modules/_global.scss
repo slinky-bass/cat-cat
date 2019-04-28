@@ -44,35 +44,40 @@ img {
 ul {
 	list-style: none;
 	margin: 0;
-
-	li {
-
-		a {
-			text-decoration: none;
-		}
-	}
 }
 
 a {
 	color: $link-color;
 	cursor: pointer;
+	transition: all 300ms ease-in-out;
+	text-transform: capitalize;
+	text-decoration: none;
 
 	&:hover {
 		color: $highlight-color;
+		border-bottom-color: $highlight-color;
 	}
+}
+
+.lowercase-text {
+	text-transform: lowercase;
 }
 
 .main-container {
 	overflow: hidden;
 	height: 100%;
 
+	&.selected .list-container > * {
+		pointer-events: none;
+	}
+
 	.main-nav {
-		height: 60px;
+		height: 65px;
 	}
 
 	.list-container {
 		width: 100%;
-		height: calc(100% - 60px);
+		height: calc(100% - 65px);
 		@include rem('padding', 11px 35px 15px 35px);
 	
 		//Grid prefixes added manually for IE as relying autoprefixer not advised for this

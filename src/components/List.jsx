@@ -20,14 +20,14 @@ class List extends Component {
     }
 
     mapListItemsToTableRows(item, index) {
-        const imageSrc = "http://placehold.it/150&text=Item$" + index;
-        const image = <img className="list-item-image" src={imageSrc} alt="placeholder image" />;
+        const image = <img className="list-item-image" src={item.imageSrc} alt="a placeholder for a cat" />;
         const title = item.title;;
         const description = item.description;
-
         const rowData = [image, title, description];
+
         return (
-            <TableRow key={index} rowData={rowData} allData={item} selectListItem={this.props.selectListItem} />);
+            <TableRow key={index} rowData={rowData} allData={item} selectListItem={this.props.selectListItem} />
+        );
     }
 
     getListTable() {
@@ -40,7 +40,7 @@ class List extends Component {
                 sortValue: ""
             },
             {
-                displayValue: "Title",
+                displayValue: "Breed",
                 sortValue: "title"
             },
             {

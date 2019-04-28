@@ -39,18 +39,4 @@ input[type="submit"] {
 	text-decoration: none;
 	text-transform: capitalize;
 	transition: color 300ms ease-in-out;
-
-	&:disabled {
-		border: none;
-		color: $medium-grey;
-
-		&:hover {
-			border: none;
-			color: $medium-grey;
-		}
-	}
-
-	&:hover:enabled {
-		color: $highlight-color;
-	}
 }

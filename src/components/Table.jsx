@@ -51,7 +51,7 @@ export class Table extends Component {
                 filterHeaders[i].classList.remove("active-asc");
             }
         }
-        this.props.sortChatList(sortValue, sortOrder);
+        this.props.sortList(sortValue, sortOrder);
     }
 
     render() {
@@ -76,11 +76,11 @@ export class TableRow extends Component {
     }
 
     componentWillMount() {
-        this.setState({ allData: this.props.allData, selectedId: this.props.selectedId });
+        this.setState({ allData: this.props.allData });
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ allData: nextProps.allData, selectedId: nextProps.selectedId });
+        this.setState({ allData: nextProps.allData });
     }
 
     generateTableRowItem(item, index) {
@@ -97,9 +97,9 @@ export class TableRow extends Component {
     render() {
         const self = this;
         const row = this.generateTableRow(self.props.rowData);
-        const chatListClasses = self.state.allData.conversationId === self.props.selectedId ? `table-row active ${self.props.statusClassName}` : `table-row ${self.props.statusClassName}`;
+    
         return (
-            <div className={chatListClasses} onClick={() => self.props.selectConversation(self.state.allData.conversationId, self.state.allData.adminAssisting, self.props.statusClassName)}>
+            <div className="table-row" onClick={() => self.props.selectListItem(self.state.allData.id)}>
                 {row}
             </div>
         );

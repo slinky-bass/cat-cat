@@ -1,26 +1,65 @@
 .main-nav {
-	background: $primary-color;
+	display: flex;
+	background: -webkit-linear-gradient(left, $deep-purple, $violet);
+	background-color: linear-gradient(to right, $deep-purple, $violet); 
 	color: $white;
 	@include rem('padding', 0 50px);
 
 	.logo-container {
-		display: inline-block;
-		width: 50%;
+		flex: 4;
 		@include rem('padding', 15px 0);
+
+		// svg {
+		// 	height: 40px;
+		// 	@include rem('margin-right', 20px);
+
+		// 	path {
+		// 		fill: $white;
+		// 	}
+			
+		// }
+
+		h1 {
+			display: inline-block;
+			margin: 0;
+			@include rem('padding-right', 20px);
+			vertical-align: middle;
+		}
+
+		span {
+			font-size: 12px;
+			font-style: italic;
+			font-weight: 300;
+			vertical-align: middle;
+		}
 	}
 
 	.nav-tab-list {
-		display: inline-block;
-		width: 50%;
+		flex: 1;
 		padding: 0;
 
 		.nav-tab-item {
 			display: inline-block;
 			@include rem('padding', 15px 20px);
 
+			a {
+				color: $white;
+
+				&:hover {
+					color: $highlight-color;
+				}
+			}
+
 			&.active {
-				background-color: $white;
-				opacity: 0.4;
+
+				a {
+					border-bottom: 1px solid $white;
+
+					&:hover {
+						color: $highlight-color;
+						border-bottom-color: $highlight-color;
+					}
+				}
 			}
 		}
 	}

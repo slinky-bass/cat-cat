@@ -8,20 +8,11 @@ a {
 	@include rem('font-size', 14px);
 }
 
-.site-title {
-	@include rem('font-size', 30px);
-}
-
-.helper-text {
-	@include rem('font-size', 12px);
-}
-
-.message-time, .attachment-time {
-	@include rem('font-size', 12px);
+figcaption {
+	font-size: 12px;
 }
 
 button,
-.link-as-btn a,
 input[type="submit"] {
 	@include rem('font-size', 14px);
 }
