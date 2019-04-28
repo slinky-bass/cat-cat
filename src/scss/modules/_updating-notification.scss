@@ -1,0 +1,17 @@
+.updating-notification {
+	@extend %clearfix;
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	display: inline-block;
+	margin: 0;
+	background-color: $white;
+	border-radius: 20px;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+
+	.updating-text {
+		margin: 0;
+		padding: 30px 35px;
+	}
+}

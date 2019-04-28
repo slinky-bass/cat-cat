@@ -1,0 +1,32 @@
+.error-notification {
+	@extend %clearfix;
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	display: inline-block;
+	margin: 0;
+	background-color: $white;
+	border-radius: 20px;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+
+	.error-text {
+		margin: 0;
+		padding: 30px 35px;
+	}
+
+	#closeButton {
+		width: 100%;
+		border: none;
+		border-top: 1px $light-grey solid;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		padding: 15px;
+		font-size: 16px;
+		font-weight: 600;
+	}
+
+	&.hidden {
+		display: none;
+	}
+}

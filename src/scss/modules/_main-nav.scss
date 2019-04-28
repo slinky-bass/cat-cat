@@ -1,0 +1,60 @@
+.main-nav {
+	background: $dark-grey;
+	color: $white;
+
+	.logo-container {
+		display: inline-block;
+		@include rem('padding', 15px 15px 15px 14px);
+
+		svg {
+			@include rem('height', 30px);
+			width: 35px;
+		}
+
+		span {
+			display: inline-block;
+			width: 100%;
+			height: 1px;
+			border-bottom: 1px solid $white;
+		}
+	}
+
+	.nav-tab-list {
+		padding: 0;
+		@include rem('padding-top', 34px);
+
+		.nav-tab-item {
+			display: inline-block;
+			@include rem('height', 60px);
+			@include rem('padding', 18px 20px);
+
+			&.active {
+				background-color: $white;
+				opacity: 0.4;
+
+				svg {
+
+					.svg-fill {
+						fill: $primary-color;
+					}
+				}
+			}
+		}
+	}
+
+	svg {
+		height: 23px;
+		width: 25px;
+
+		.svg-fill {
+			fill: $white;
+		}
+
+		&:hover {
+
+			.svg-fill {
+				fill: $light-grey;
+			}
+		}
+	}
+}

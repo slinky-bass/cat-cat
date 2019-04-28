@@ -1,0 +1,14 @@
+.list-container {
+	border-right: 1px $border-color solid;
+	background-color: transparent;
+	
+	//error notification container and loading icon container
+	.notification-container {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 2;
+	}
+}

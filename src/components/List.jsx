@@ -20,8 +20,9 @@ class List extends Component {
     }
 
     mapListItemsToTableRows(item, index) {
-        const image = "";
-        const title = item.name;
+        const imageSrc = "http://placehold.it/150&text=Item$" + index;
+        const image = <img src={imageSrc} alt="placeholder image" />;
+        const title = item.title;;
         const description = item.description;
 
         const rowData = [image, title, description];
@@ -92,7 +93,7 @@ class List extends Component {
 }
 
 List.propTypes = {
-
+    list: PropTypes.object.isRequired
 }
 
 export default List;

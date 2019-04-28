@@ -1,0 +1,76 @@
+.flex-table {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    line-height: 1.5;
+
+    .table-row-list {
+        overflow-y: scroll;
+    }
+
+    .table-row {
+        position: relative;
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+        transition: background-color 300ms ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        //Alternate table row background colour highlighting
+        &:nth-child(odd) {
+
+            .table-row-item {
+                background-color: $white;
+            }
+
+            &:hover .table-row-item {
+                background-color: darken($lightest-grey, 5%);
+            }
+        }
+
+        &:nth-child(even) {
+
+            .table-row-item {
+                background-color: $lightest-grey;
+            }
+
+            &:hover .table-row-item {
+                background-color: darken($lightest-grey, 5%);
+            }
+        }
+
+        //table header
+        &.table-header {
+            font-weight: bold;
+            border-bottom: 1px $border-color solid;
+
+            &:hover .table-row-item {
+                background-color: $white;
+                cursor: default;
+            }
+
+            .table-row-item {
+
+                .item-description {
+                    @include rem("margin-right", 10px);
+                    position: relative;
+                    cursor: pointer;
+                }
+            }
+        }
+        //table row item with transition styles for managing active highlight on selection
+        .table-row-item {
+            position: relative;
+            display: flex;
+            flex-flow: row nowrap;
+            flex-grow: 1;
+            flex-basis: 0;
+            word-break: break-word;
+            text-transform: capitalize;
+            @include rem('padding', 17px);
+        }
+    }
+}
