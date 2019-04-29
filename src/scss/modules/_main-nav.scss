@@ -3,22 +3,21 @@
 	background: -webkit-linear-gradient(left, $deep-purple, $violet);
 	background-color: linear-gradient(to right, $deep-purple, $violet); 
 	color: $white;
-	@include rem('padding', 0 50px);
+	@include rem('padding', 0 20px);
+
+	@media (min-width: $mobile-media-query-min-width) {
+		@include rem('padding', 0 50px);
+	}
 
 	.logo-container {
-		flex: 4;
+		flex: 1 1 auto;
+		flex-basis: 70%;
 		@include rem('padding', 15px 0);
 
-		// svg {
-		// 	height: 40px;
-		// 	@include rem('margin-right', 20px);
-
-		// 	path {
-		// 		fill: $white;
-		// 	}
-			
-		// }
-
+		@media (min-width: $mobile-media-query-min-width) {
+			//flex-basis: 80%;
+		}
+		
 		h1 {
 			display: inline-block;
 			margin: 0;
@@ -27,20 +26,37 @@
 		}
 
 		span {
+			display: block;
 			font-size: 12px;
 			font-style: italic;
 			font-weight: 300;
-			vertical-align: middle;
+
+
+			@media (min-width: $mobile-media-query-min-width) {
+				display: inline-block;
+				vertical-align: middle;
+			}
 		}
 	}
 
 	.nav-tab-list {
-		flex: 1;
+		flex: 1 1 auto;
+		flex-basis: 40%;
+		margin-top: auto;
 		padding: 0;
+
+		@media (min-width: $mobile-media-query-min-width) {
+			margin-top: 0;
+			flex-basis: 185px;
+		}
 
 		.nav-tab-item {
 			display: inline-block;
-			@include rem('padding', 15px 20px);
+			@include rem('padding', 15px 8px);
+
+			@media (min-width: $mobile-media-query-min-width) {
+				@include rem('padding', 15px);
+			}
 
 			a {
 				color: $white;

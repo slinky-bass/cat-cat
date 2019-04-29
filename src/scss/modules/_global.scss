@@ -72,13 +72,21 @@ a {
 	}
 
 	.main-nav {
-		height: 65px;
+		
+
+		@media (min-width: $mobile-media-query-min-width) {
+			height: 65px;
+		}
 	}
 
 	.list-container {
 		width: 100%;
 		height: calc(100% - 65px);
 		@include rem('padding', 11px 35px 15px 35px);
+
+		@media (min-width: $mobile-media-query-min-width) {
+			height: calc(100% - 65px);
+		}
 	
 		//Grid prefixes added manually for IE as relying autoprefixer not advised for this
 		//Read https://rachelandrew.co.uk/archives/2018/07/17/should-i-try-to-use-the-ie-version-of-grid-layout-revisited-for-2018/ for more info 
