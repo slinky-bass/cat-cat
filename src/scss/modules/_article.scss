@@ -1,11 +1,10 @@
 .article-container {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    
+    .blackout {
+        transition: opacity 300ms ease-in-out;
+        opacity: 0;
+    }
 
     article {
         position: absolute;
@@ -14,8 +13,32 @@
         left: 20%;
         right: 20%;
         border-radius: $border-radius;   
-        background-color: $white;
-        z-index: 2;   
+        background-color: $white; 
+        transform: scale(0);  
+        transition: transform 300ms ease-in-out; 
+    }
+
+    //transition the scale of the article container and the blackout background when an item is selected
+    &.selected { 
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        
+        .blackout {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 1;
+        }
+        
+        article {
+            transform: scale(1);
+            z-index: 2;
+        }
     }
 
     header {
@@ -23,7 +46,8 @@
         @include rem('padding', 15px 25px);
         border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
-        background-color: $highlight-color;
+        background: -webkit-linear-gradient(left, $magenta, $hot-salmon);
+	    background-color: linear-gradient(to right, $magenta, $hot-salmon); 
         color: $white;
 
         h3 {
@@ -34,7 +58,10 @@
                 position: absolute;
                 top: 0;
                 right: 0;
-                color: $white;
+
+                svg {
+                    width: 12px;
+                }
             }
         }
     }
@@ -51,7 +78,7 @@
             }
 
             figcaption {
-                @include rem('padding', 10px 25px);
+                @include rem('padding', 5px 20px 15px 20px);
                 font-size: 12px;
             }
         }
@@ -59,7 +86,7 @@
         .article-text {
             flex: 1;
             margin: 0;
-            @include rem('padding', 35px);
+            @include rem('padding', 20px 30px);
         }
     }
 }

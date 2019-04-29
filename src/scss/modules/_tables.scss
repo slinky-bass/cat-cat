@@ -43,7 +43,8 @@
 
         //table header
         &.table-header {
-            font-weight: bold;
+            font-family: "work_sans";
+            font-weight: $heading-font-weight;
             border-bottom: 1px $border-color solid;
 
             &:hover .table-row-item {
